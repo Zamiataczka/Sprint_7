@@ -27,23 +27,19 @@ public class CourierDeleteTest {
         courierAllureSteps.checkDeleteCourierBody(responseDeleteCourier);
     }
 
-    @Test // Тест падает - неверная ошибка в response
+    @Test // Тест падает - неверная ошибка в response - 404 вместо - 400
     @DisplayName("Delete a courier")
     @Description("Delete a courier without ID")
     public void deleteMissCourier() {
-        Response responseCreateCourier = courierAllureSteps.createCourier("GoslingTEST16","1337", "Райан");
-        courierAllureSteps.checkCreatingCourierBody(responseCreateCourier);
-        Response responseDeleteCourier = courierAllureSteps.courierMissDelete("GoslingTEST16","1337");
-        courierAllureSteps.checkDeleteCourierWithMissData(responseDeleteCourier);
+        Response responseDeleteCourier = courierAllureSteps.courierWithoutIdDelete();
+        courierAllureSteps.checkDeleteCourierWithoutIdResponse(responseDeleteCourier);
     }
 
-    @Test // Тест падает - неверная ошибка в response
+    @Test // Тест падает - неверная ошибка в response - 404 вместо - 400
     @DisplayName("Delete a courier")
     @Description("Delete a courier with wrong ID")
     public void deleteWrongCourier() {
-        Response responseCreateCourier = courierAllureSteps.createCourier("GoslingTEST17","1337", "Райан");
-        courierAllureSteps.checkCreatingCourierBody(responseCreateCourier);
-        Response responseDeleteCourier = courierAllureSteps.courierWrongDelete("GoslingTEST17","1337");
+        Response responseDeleteCourier = courierAllureSteps.courierWrongDelete();
         courierAllureSteps.checkDeleteCourierWithWrongData(responseDeleteCourier);
     }
 }

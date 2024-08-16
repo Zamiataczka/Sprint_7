@@ -122,13 +122,13 @@ public class CourierAllureSteps {
                 .body("ok", equalTo(true));
     }
 
-    @Step("Delete miss request")
-    public String courierMissDeletePreparingToString(Integer courierID) {
+    @Step("Delete courier without ID")
+    public String courierWithoutIdDeletePreparingToString() {
         return COURIER_DELETE;
     }
 
     @Step("Status test delete courier - 400")
-    public void checkDeleteCourierWithMissData(Response response) {
+    public void checkDeleteCourierWithoutIdResponse(Response response) {
         response
                 .then()
                 .statusCode(400)
@@ -137,17 +137,17 @@ public class CourierAllureSteps {
                 .body("message", equalTo("Недостаточно данных для удаления курьера"));
     }
 
-    @Step("Delete courier from system")
-    public Response courierMissDelete(String login, String password) {
+    @Step("Delete courier without ID from system")
+    public Response courierWithoutIdDelete() {
         return given()
                 .header("Content-type", "application/json")
                 .when()
-                .delete(courierMissDeletePreparingToString(getCourierID(login, password)));
+                .delete(courierWithoutIdDeletePreparingToString());
     }
 
-    @Step("Delete miss request")
-    public String courierWrongDeletePreparingToString(Integer courierID) {
-        courierID = 13125;
+    @Step("Delete courier with non-existent ID")
+    public String courierWrongDeletePreparingToString() {
+        String courierID = "13125";
         return COURIER_DELETE + courierID;
     }
 
@@ -162,10 +162,10 @@ public class CourierAllureSteps {
     }
 
     @Step("Delete courier from system")
-    public Response courierWrongDelete(String login, String password) {
+    public Response courierWrongDelete() {
         return given()
                 .header("Content-type", "application/json")
                 .when()
-                .delete(courierWrongDeletePreparingToString(getCourierID(login, password)));
+                .delete(courierWrongDeletePreparingToString());
     }
 }
