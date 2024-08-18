@@ -124,7 +124,8 @@ public class CourierAllureSteps {
 
     @Step("Delete courier without ID")
     public String courierWithoutIdDeletePreparingToString() {
-        return COURIER_DELETE;
+        String courierID = "";
+        return COURIER_DELETE + courierID;
     }
 
     @Step("Status test delete courier - 400")
@@ -155,10 +156,10 @@ public class CourierAllureSteps {
     public void checkDeleteCourierWithWrongData(Response response) {
         response
                 .then()
-                .statusCode(400)
+                .statusCode(404)
                 .and()
                 .assertThat()
-                .body("message", equalTo("Недостаточно данных для удаления курьера"));
+                .body("message", equalTo("Курьера с таким id нет"));
     }
 
     @Step("Delete courier from system")

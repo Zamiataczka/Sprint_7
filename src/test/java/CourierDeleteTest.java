@@ -30,15 +30,15 @@ public class CourierDeleteTest {
     @Test // Тест падает - неверная ошибка в response - 404 вместо - 400
     @DisplayName("Delete a courier")
     @Description("Delete a courier without ID")
-    public void deleteMissCourier() {
+    public void deleteCourierWithoutId() {
         Response responseDeleteCourier = courierAllureSteps.courierWithoutIdDelete();
         courierAllureSteps.checkDeleteCourierWithoutIdResponse(responseDeleteCourier);
     }
 
-    @Test // Тест падает - неверная ошибка в response - 404 вместо - 400
+    @Test // Тест падает - ошибка в поле message
     @DisplayName("Delete a courier")
     @Description("Delete a courier with wrong ID")
-    public void deleteWrongCourier() {
+    public void deleteCourierWithWrongId() {
         Response responseDeleteCourier = courierAllureSteps.courierWrongDelete();
         courierAllureSteps.checkDeleteCourierWithWrongData(responseDeleteCourier);
     }
